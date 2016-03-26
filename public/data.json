@@ -1,0 +1,39 @@
+{ "data" : {
+	"sources":[
+		{"value" : 0, "name": "lähde0"},
+		{"value" : 1, "name": "lähde1"},
+		{"value" : 2, "name": "lähde2"},
+		{"value" : 3, "name": "lähde3"},
+		{"value" : 4, "name": "lähde4"},
+		{"value" : 5, "name": "lähde5"},
+		{"value" : 6, "name": "lähde6"},
+		{"value" : 7, "name": "lähde7"},
+		{"value" : 8, "name": "lähde8"},
+		{"value" : 9, "name": "lähde9"},
+		{"value" : 10, "name": "lähde10"},
+		{"value" : 11, "name": "lähde11"},
+		{"value" : 12, "name": "lähde12"},
+		{"value" : 13, "name": "ihan vaan testiksi laitoin nimen pitkäksi"},
+		{"value" : 14, "name": "lähde14"},
+		{"value" : 15, "name": "lähde15"}
+	],
+	"endings":[
+		{"value" : 0, "name": "tulo0"},
+		{"value" : 1, "name": "tulo1"},
+		{"value" : 2, "name": "tulo2"},
+		{"value" : 3, "name": "tulo3"},
+		{"value" : 4, "name": "tulo4"},
+		{"value" : 5, "name": "tulo5"},
+		{"value" : 6, "name": "tulo6"},
+		{"value" : 7, "name": "tulo7"},
+		{"value" : 8, "name": "tulo8"},
+		{"value" : 9, "name": "tulo9"},
+		{"value" : 10, "name": "tulo10"},
+		{"value" : 11, "name": "tulo11"},
+		{"value" : 12, "name": "tulo12"},
+		{"value" : 13, "name": "tulo13"},
+		{"value" : 14, "name": "tulo14"},
+		{"value" : 15, "name": "tulo15"}
+	]
+}}
+

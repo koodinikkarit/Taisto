@@ -1,0 +1,29 @@
+html
+	head
+		title Taisto
+		meta(charset="utf-8")
+		script(src="jquery-2.2.2.min.js")
+		script(src="/socket.io/socket.io.js")
+		script(src="koodii.js")
+		link(href="tyyli.css" rel="stylesheet")
+	body
+		#content
+			h1 Taisto
+			nav
+				ul
+					li(onclick="setContent(0)") Taulu
+					li(onclick="setContent(1)") Lomake
+					li(onclick="setContent(2)") Pikavalinnat
+			#input
+				#table
+					table#fulltable
+				#form
+					form
+						Valitse syöttö:
+						select
+						Valitse ulostulo:
+						select
+						input(type="submit")
+				#preset
+					ul
+						li Moi
