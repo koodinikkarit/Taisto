@@ -12,18 +12,22 @@ html
 			nav
 				ul
 					li(onclick="setContent(0)") Taulu
-					li(onclick="setContent(1)") Lomake
+					li(onclick="setContent(1)") Valikko
 					li(onclick="setContent(2)") Pikavalinnat
+			hr
 			#input
-				#table
+				#table.inputdiv
 					table#fulltable
-				#form
+				#menu.inputdiv
+					select
+					#links
+				#form.inputdiv
 					form
 						Valitse syöttö:
 						select
 						Valitse ulostulo:
 						select
 						input(type="submit")
-				#preset
+				#preset.inputdiv
 					ul
 						li Moi

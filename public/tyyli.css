@@ -1,19 +1,20 @@
 body{
 background-color:#74bfb1;
 font-familiy:Helvetica;
+font-size:18px;
 }
+
 #content{
-width:1200px;
 background-color:white;
-margin-left:auto;
-margin-right:auto;
 padding:25px;
 }
 h1{
-margin:5px;
+margin:2px;
+font-size:300%;
+text-align:right;
 }
 nav{
-margin-bottom:20px;
+margin-bottom:5px;
 }
 nav ul{
 list-style-type:none;
@@ -24,7 +25,7 @@ nav ul li{
 display:inline-block;
 background-color:#EEE;
 padding:10px;
-font-size:18px;
+font-size:140%;
 margin:5px;
 border-radius:10px;
 cursor:pointer;
@@ -34,18 +35,67 @@ background-color:#49b29f;
 color:white;
 }
 
-#input div{
-display:none;
+
+/* different input divs */
+#input {
+margin-top:20px;
 }
 
+/* table */
+#input div#table{
+overflow-x:scroll;
+}
+#input div#table #fulltable{
+
+}
 #fulltable th{
 background-color:#EEE
 }
 #fulltable td.button{
-cursor:pointer;
 background-color:#b3e5dc;
 width:63px;
 }
 #fulltable td.button:hover{
 background-color:#49b29f;
+}
+#fulltable td[restrict="no"]{
+cursor:pointer
+}
+
+/* menu */
+#input div#menu{
+text-align:center;
+}
+#input div#menu select{
+width:90%;
+font-size:100%;
+}
+#input div#menu #links{
+margin-top:20px;
+}
+#input div#menu #links .link{
+padding:10px;
+width:90%;
+font-size:100%;
+margin:10px;
+background-color:#DDFFDD;
+cursor:pointer;
+border-radius:10px;
+margin-left:auto;
+margin-right:auto;
+}
+
+
+/* FOR MOBILE ONLY */
+@media only screen and (max-device-width:600px) {
+	body{
+	font-size:30px;
+	}
+	
+	#input div#menu select{
+	font-size:200%;
+	}
+	#input div#menu #links .link{
+	margin-top:20px;
+	}
 }

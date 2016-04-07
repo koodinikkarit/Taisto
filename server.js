@@ -2,9 +2,15 @@ var port = 1337;
 var sourceCount = 16;
 
 var states = [];
-states[0] = 5;
 
+//setting default states
+states[1] = 1;
+states[2] = 2;
+states[7] = 2;
+
+var request = require('request');
 var express = require('express');
+var http = require('http');
 var app = express();
 
 app.set('view engine', 'jade');
@@ -21,10 +27,23 @@ io.on('connection', function(socket){
 	socket.emit('updatestates', {states : states});
 
 	socket.on('setstate', function(data){
-		console.log('state set: '+data.source+ ' -> ' + data.ending);
-		states[data.source] = data.ending;
-		io.emit('updatestates', {states:states});
+		console.log('sending request to set '+data.source+ ' -> ' + data.ending);
+		doTheGetRequest(data.source, data.ending, socket);
 	});
 });
+
+function doTheGetRequest(source, end){
+	request.get({
+		url : 'http://192.168.180.21:8080/set',
+		qs : {con : end, cpu : source}
+	}, function(error, response, body){
+		if(!error && response.statusCode == 200){
+			console.log('switch '+source+' -> '+end+' succesful');
+			states[end] = source;
+			io.emit('updatestates', {states : states});
+		}
+	});
+	
+}
 
 
