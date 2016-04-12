@@ -102,6 +102,8 @@ text-align:center;
 #input div#menu select{
 width:90%;
 font-size:100%;
+padding:5px;
+border-radius:20px;
 }
 #input div#menu #links{
 margin-top:20px;
