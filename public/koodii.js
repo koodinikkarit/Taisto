@@ -17,6 +17,7 @@ $('document').ready(function(){
 
 		fillTable(jsondata);
 		fillMenu(jsondata);
+		fillPresets(jsondata);
 
 		//asetetaan io toiminnallisuus
 		socket = io();
@@ -25,11 +26,11 @@ $('document').ready(function(){
 			console.log(data.states);
 			statesc = data.states;
 			
-			$('#fulltable td.button[restrict="restrict"]').css('background-color', '#DDD');
-			$('#fulltable td.button[restrict="no"]').css('background-color', '#B3E5DC');
+			$('#ctable td.button[restrict="restrict"]').css('background-color', '#DDD');
+			$('#ctable td.button[restrict="no"]').css('background-color', '#B3E5DC');
 			for(var i = 0; i < data.states.length; i++){
 				if(data.states[i]){
-					$('#fulltable td.button[source='+data.states[i]+'][ending='+i+']').css('background-color', 'red');
+					$('#ctable td.button[source='+data.states[i]+'][ending='+i+']').css('background-color', 'red');
 
 				}
 			}
@@ -67,34 +68,43 @@ function setContent(num){
 }
 
 function fillTable(data){
-	var tablehtml = '';
 	var sources = data.data.sources;
 	console.log(sources);
 	var endings = data.data.endings;
-	var sourcesrowhtml = '<tr><th></th>';
-	for(var i = 0; i < sources.length; i++){
-		sourcesrowhtml += '<th>'+sources[i].name+'</th>';
+
+	var etablehtml = '<tr><th class="first"></th></tr>';
+	for(var i = 0; i < endings.length; i++){
+		etablehtml += '<tr><th>'+endings[i].name+'</th></tr>';
 	}
-	tablehtml += sourcesrowhtml;
+	$('#input div#table table#etable').html(etablehtml);
+
+
+	var ctablehtml = '';
+	var sourcesrowhtml = '<tr>';
+	for(var i = 0; i < sources.length; i++){
+		sourcesrowhtml += '<th><div class="header">'+sources[i].name+'</div></th>';
+	}
+	ctablehtml += sourcesrowhtml;
+	
 	for(var i = 0; i < endings.length; i++){
 		if(endings[i].restrict == 1){
-			var rowhtml = '<tr><th style="background-color:#DDD;color:#555;">' + endings[i].name + '</th>';
+			var rowhtml = '<tr>';
 			for(var o = 0; o < sources.length; o++){
 				rowhtml += '<td class="button" restrict="restrict" source='+sources[o].value+' ending='+endings[i].value+' title="'+sources[o].name+' -> '+endings[i].name+'"></td>';
 			}
 			rowhtml += '</tr>';
 		} else {
-			var rowhtml = '<tr><th>' + endings[i].name + '</th>';
+			var rowhtml = '<tr>';
 			for(var o = 0; o < sources.length; o++){
 				rowhtml += '<td class="button" restrict="no" source='+sources[o].value+' ending='+endings[i].value+' title="'+sources[o].name+' -> '+endings[i].name+'"></td>';
 			}
 			rowhtml += '</tr>';
 		}
-		tablehtml += rowhtml;
+		ctablehtml += rowhtml;
 	}
-	$('#fulltable').html(tablehtml);
+	$('#input div#table #ctable').html(ctablehtml);
 
-	$('#fulltable td.button[restrict="no"]').click(function(){
+	$('#ctable td.button[restrict="no"]').click(function(){
 		var source = $(this).attr('source');
 		var ending = $(this).attr('ending');
 		setState(ending, source);
@@ -137,4 +147,16 @@ function createMenuLinks(ending, sources){
 		setState(ending, source);
 	});
 
+}
+
+
+function fillPresets(data){
+	$.getJSON("/presets.json", function(jsondata){
+		var presets = jsondata.presets;
+		var presethtml = '';
+		for(var i = 0; i < jsondata.presets.length; i++){
+			presethtml += '<div class="link" onclick="setState('+presets[i].ending+', '+presets[i].source+')">'+presets[i].name+'</div>';
+		}
+		$('#input div#preset').html(presethtml);
+	});
 }
