@@ -22,6 +22,21 @@ app.get('/', function(req, res){
 	res.render('index');
 });
 
+app.get('/api', function(req, res){
+	var cpu = req.query.cpu;
+	var con = req.query.con;
+	console.log('new /api request, source = '+cpu+', end = '+con);
+
+	if(cpu >= 0 && cpu < sourceCount && con >= 0){
+		doTheGetRequest(cpu, con);
+		res.render('apisuccess');
+	} else {
+		console.log('/api request failed. Invalid attributes.');
+		res.render('apifail');
+	}
+
+});
+
 io.on('connection', function(socket){
 	console.log('new connection');
 	socket.emit('updatestates', {states : states});
@@ -31,6 +46,8 @@ io.on('connection', function(socket){
 		doTheGetRequest(data.source, data.ending, socket);
 	});
 });
+
+
 
 function doTheGetRequest(source, end){
 	request.get({
