@@ -67,6 +67,10 @@ function setContent(num){
 	}	
 }
 
+function update() {
+	socket.emit('update');
+}
+
 function fillTable(data){
 	var sources = data.data.sources;
 	console.log(sources);

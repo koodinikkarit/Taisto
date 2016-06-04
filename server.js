@@ -46,6 +46,10 @@ io.on('connection', function(socket){
 		console.log('sending request to set '+data.source+ ' -> ' + data.ending);
 		doTheGetRequest(data.source, data.ending, socket);
 	});
+	
+	socket.on('update', function() {
+		Matti.getAllValues();
+	});
 });
 
 Matti.setNewVideoConnectionCallback(function(cpu, con) {
