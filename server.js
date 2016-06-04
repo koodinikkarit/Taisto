@@ -11,6 +11,7 @@ states[7] = 2;
 var request = require('request');
 var express = require('express');
 var http = require('http');
+var Matti = require("./Matti.js/Matti")("192.168.180.21", 4445);
 var app = express();
 
 app.set('view engine', 'jade');
@@ -47,19 +48,34 @@ io.on('connection', function(socket){
 	});
 });
 
+Matti.setNewVideoConnectionCallback(function(cpu, con) {
+	console.log("cpu " + cpu + " con " + con);
+	states[con] = cpu;
+	io.emit('updatestates', {states : states});
+});
 
+Matti.setNewKwmConnectionCallback(function(con, cpu) {
+	
+});
 
 function doTheGetRequest(source, end){
-	request.get({
-		url : 'http://192.168.180.21:8080/set',
-		qs : {con : end, cpu : source}
-	}, function(error, response, body){
-		if(!error && response.statusCode == 200){
-			console.log('switch '+source+' -> '+end+' succesful');
-			states[end] = source;
-			io.emit('updatestates', {states : states});
-		}
+	console.log("source " + source, " end " + end);
+	console.log('switch '+source+' -> '+end+' succesful');
+	states[end] = source;
+	io.emit('updatestates', {states : states});
+	Matti.setVideoConnection(source, end, function(data) {
+		console.log(data);
 	});
+	// request.get({
+	// 	url : 'http://192.168.180.21:8080/set',
+	// 	qs : {con : end, cpu : source}
+	// }, function(error, response, body){
+	// 	if(!error && response.statusCode == 200){
+	// 		console.log('switch '+source+' -> '+end+' succesful');
+	// 		states[end] = source;
+	// 		io.emit('updatestates', {states : states});
+	// 	}
+	// });
 	
 }
 
