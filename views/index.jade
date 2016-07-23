@@ -5,7 +5,10 @@ html
 		script(src="jquery-2.2.2.min.js")
 		script(src="/socket.io/socket.io.js")
 		script(src="koodii.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js")
 		link(href="tyyli.css" rel="stylesheet")
+		link(href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet")
 	body
 		#content
 			h1 Taisto
@@ -15,6 +18,20 @@ html
 					li(onclick="setContent(1)") Valikko
 					li(onclick="setContent(2)") Pikavalinnat
 					li(onclick="update()") Päivitä
+
+					form(method="GET")
+						select(name="matrix")
+							option 192.168.180.98
+
+					
+					form(method="POST")
+						input(placeholder="ip")
+						input(placeholder="portti")
+						input(type="submit" value="Lisaa laite")
+
+					form(method="POST")
+						input(placeholder="")
+						input()
 					
 			hr
 			#input

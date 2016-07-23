@@ -10,9 +10,14 @@ states[7] = 2;
 
 var request = require('request');
 var express = require('express');
+var bodyParser = require('body-parser')
 var http = require('http');
-var Matti = require("./Matti.js/Matti")("192.168.180.21", 4445);
+// var Matti = require("./Matti.js/Matrix")(1, "192.168.180.98", 5555);
 var app = express();
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.set('view engine', 'jade');
 app.use(express.static('public'));
@@ -38,6 +43,22 @@ app.get('/api', function(req, res){
 
 });
 
+app.get('/api/matrixs', function(req, res) {
+
+});
+
+app.post('/api/creatematrix', function (req, res) {
+
+});
+
+app.put('/api/updatematrix', function (req, res) {
+
+});
+
+app.delete('/api/deletematrix', function (req, res) {
+
+});
+
 io.on('connection', function(socket){
 	console.log('new connection');
 	socket.emit('updatestates', {states : states});
@@ -52,24 +73,31 @@ io.on('connection', function(socket){
 	});
 });
 
-Matti.setNewVideoConnectionCallback(function(cpu, con) {
-	console.log("cpu " + cpu + " con " + con);
-	states[con] = cpu;
-	io.emit('updatestates', {states : states});
-});
+// Matti.newVideoState = function (con, cpu) {
+// 	console.log("new video state con " + con + " " + cpu);
+// 	states[con] = cpu;
+// 	io.emit('updatestates', {states : states});
+// }
 
-Matti.setNewKwmConnectionCallback(function(con, cpu) {
+// Matti.setNewVideoConnectionCallback(function(cpu, con) {
+// 	console.log("cpu " + cpu + " con " + con);
+// 	states[con] = cpu;
+// 	io.emit('updatestates', {states : states});
+// });
+
+// Matti.setNewKwmConnectionCallback(function(con, cpu) {
 	
-});
+// });
 
 function doTheGetRequest(source, end){
 	console.log("source " + source, " end " + end);
 	console.log('switch '+source+' -> '+end+' succesful');
 	states[end] = source;
 	io.emit('updatestates', {states : states});
-	Matti.setVideoConnection(source, end, function(data) {
-		console.log(data);
-	});
+	// Matti.setVideoConnection(source, end, function(data) {
+	// 	console.log(data);
+	// });
+	Matti.setVideoConnection(source, end);
 	// request.get({
 	// 	url : 'http://192.168.180.21:8080/set',
 	// 	qs : {con : end, cpu : source}
