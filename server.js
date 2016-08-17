@@ -60,9 +60,7 @@ app.delete('/api/deletematrix', function (req, res) {
 });
 
 io.on('connection', function(socket){
-	console.log('new connection');
-	socket.emit('updatestates', {states : states});
-
+	socket.emit('updatestates', {states : states});	
 	socket.on('setstate', function(data){
 		console.log('sending request to set '+data.source+ ' -> ' + data.ending);
 		doTheGetRequest(data.source, data.ending, socket);
