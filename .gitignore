@@ -1,2 +1,3 @@
 public/data.json
 public/presets.json
+node_modules/*
